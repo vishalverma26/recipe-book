@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" (submit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" [disabled]="recipeForm?.invalid" class="btn btn-success">Save</button>
+          <button type="button" class="btn btn-danger ml-5" [routerLink]="['../']">Cancel</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" formControlName="name" id="name">
+            <span *ngIf="recipeForm.get('name').invalid && recipeForm.get('name').touched" class="help-block error">
+              Name is mandatory!
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image URL</label>
+            <input type="text" class="form-control" formControlName="imagePath" id="imagePath" #imagePath>
+            <span *ngIf="recipeForm.get('imagePath').invalid && recipeForm.get('imagePath').touched" class="help-block error">
+              Image Path is mandatory!
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- I achieved this by following commented way -->
+          <!-- <img [src]="recipeForm.get('imagePath').value" class="img-responsive" alt=""> -->
+          <img [src]="imagePath.value" class="img-responsive" alt="">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea type="text" class="form-control" formControlName="description" id="description" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12" formArrayName="ingredients">
+          <div
+          class="row form-group"
+          *ngFor="let ingredientCtrl of recipeIngredients; let i = index"
+          [formGroupName]="i">
+            <div class="col-xs-8">
+              <input type="text" formControlName="name" class="form-control">
+              <span class="help-block error" *ngIf="recipeIngredients[i]?.get('name')?.invalid && recipeIngredients[i]?.get('name')?.touched">
+                Invalid name!
+              </span>
+            </div>
+            <div class="col-xs-2">
+              <input type="number" formControlName="amount" class="form-control">
+              <span class="help-block error" *ngIf="recipeIngredients[i]?.get('amount')?.invalid && recipeIngredients[i]?.get('amount')?.touched">
+                Invalid amount!
+              </span>
+            </div>
+            <div class="col-xs-2">
+              <input type="button" class="btn btn-danger" value="Delete" (click)="deleteIngredient(i)">
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <button class="btn btn-success" type="button" (click)="onAddIngredient()">Add Ingredient</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

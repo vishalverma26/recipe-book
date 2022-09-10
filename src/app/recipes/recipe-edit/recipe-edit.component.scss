@@ -1,0 +1,13 @@
+.ml-5 {
+  margin-left: 5px;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid #a70000;
+}
+
+.help-block.error {
+  color: #a70000;
+  font-size: 12px;
+}

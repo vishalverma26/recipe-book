@@ -1,0 +1,9 @@
+<a [routerLink]="[id]" class="list-group-item clearfix cp" [routerLinkActive]="'active'">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading"> {{ recipe?.name }} </h4>
+    <p class="list-group-item-text"> {{ recipe?.description }} </p>
+  </div>
+  <span class="pull-right">
+    <img [src]="recipe?.imagePath" [attr.alt]="recipe?.description" class="image-responsive mh-50">
+  </span>
+</a>

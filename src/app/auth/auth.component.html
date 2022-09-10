@@ -1,0 +1,27 @@
+<ng-template appPlaceholder></ng-template>
+
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-offset-3">
+    <!-- <div class="alert alert-danger" *ngIf="error">
+      <p> {{ error }} </p>
+    </div> -->
+    <!-- <app-alert [(errorMessage)]="error" *ngIf="error"></app-alert> -->
+    <form #authForm="ngForm" (submit)="submitAuthForm(authForm)" *ngIf="!isLoading; else loading">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control" id="email" ngModel name="email" required email />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" autocomplete class="form-control" id="password" ngModel name="password" required minlength="6" />
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit" [disabled]="authForm.invalid"> {{ isLoginMode ? 'Login' : 'Sign Up' }} </button> |
+        <button class="btn btn-primary" (click)="onSwitchMode()" type="button"> Switch To {{ isLoginMode ? 'Sign Up' : 'Login' }} </button>
+      </div>
+    </form>
+    <ng-template #loading>
+      <app-loading-spinner></app-loading-spinner>
+    </ng-template>
+  </div>
+</div>
