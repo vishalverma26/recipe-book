@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { apiUrl } from '../shared/misc/api-url.constant';
+import { LoggingService } from 'src/logging.service';
 import { Ingredient } from '../shared/misc/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 
@@ -14,13 +13,15 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   ingredients: Ingredient[];
 
-  constructor(private shoppingListSvc: ShoppingListService, private http: HttpClient) { }
+  constructor(private shoppingListSvc: ShoppingListService, private loggingService: LoggingService) { }
 
   ngOnInit(): void {
     this.ingredients = this.shoppingListSvc.getIngredients();
     this.subscription.add(this.shoppingListSvc.ingredientUpdated.subscribe((ingredients: Ingredient[]) => {
       this.ingredients = ingredients;
     }));
+
+    this.loggingService.printLog('Hello from ShoppingListComponent ngOnInit');
   }
 
   ngOnDestroy(): void {
