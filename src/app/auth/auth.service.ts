@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, EMPTY, Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 import { apiUrl } from "../shared/misc/api-url.constant";
 import { User } from "./user.model";
 
@@ -24,7 +25,7 @@ export class AuthService {
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {
-    this.queryParams = new HttpParams().set('key', 'AIzaSyCpNm_uKuse9919X5U-LUU-oGvFoNdGfjI');
+    this.queryParams = new HttpParams().set('key', environment.firebaseApiKey);
   }
 
   signup(email: string, password: string) {
